@@ -5,7 +5,7 @@ export default function InvoicePrintModal({ invoice, onClose }) {
   if (!invoice) return null;
 
   const totalPc = invoice.items?.reduce((sum, item) => sum + (parseInt(item.pc) || 0), 0) || 0;
-  const logoUrl = `${window.location.origin}/logo.png`;
+  const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
 
   const handlePrint = () => {
     const htmlContent = `
