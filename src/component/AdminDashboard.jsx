@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InvoiceBuilder from './InvoiceBuilder';
 import InvoiceList from './InvoiceList';
 import ItemManager from './ItemManager';
-import StaffManager from './StaffManager';
+import StaffManager from './Staffmanager';
 
 export default function AdminDashboard({ user }) {
   const [activeTab, setActiveTab] = useState('builder');
