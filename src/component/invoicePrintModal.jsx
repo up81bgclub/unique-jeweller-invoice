@@ -162,7 +162,7 @@ export default function InvoicePrintModal({ invoice, onClose }) {
                   <div class="shop-sub">Noor Palace, Amir Nishan, Aligarh-202001</div>
                   <div class="shop-sub">DEALS IN: DIAMOND, GOLD, SILVER &nbsp;&nbsp;&nbsp;&nbsp; Phone No - +91 9412545883</div>
                 </div>
-                <div><img src="${window.location.origin}${import.meta.env.BASE_URL}logo.png" class="logo-u" alt="logo"/></div>
+                <div><img src="${window.location.origin}${import.meta.env.BASE_URL}/logo.png" class="logo-u" alt="logo"/></div>
               </div>
 
               <div class="date-bar">
