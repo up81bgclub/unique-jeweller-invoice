@@ -24,7 +24,7 @@ export default function InvoiceBuilder() {
 
   const handleAddItem = (e) => {
     e.preventDefault();
-    if (!selectedItemName) return alert("Select an item");
+    if (!selectedItemName) return alert("Select or type an item");
 
     setSelectedItems([...selectedItems, {
       particular: selectedItemName,
@@ -73,6 +73,11 @@ export default function InvoiceBuilder() {
     }
   };
 
+  // 1000+ items optimize karne ke liye matching list filtering
+  const matchingItems = itemsMaster
+    .filter(item => item.name?.toLowerCase().includes((selectedItemName || '').toLowerCase()))
+    .slice(0, 40); // Top 40 search results render honge
+
   return (
     <div className="p-4 max-w-4xl mx-auto bg-white shadow rounded-lg">
       <h2 className="text-xl font-bold mb-4 text-gray-800 border-b pb-2">Create Invoice</h2>
@@ -89,18 +94,23 @@ export default function InvoiceBuilder() {
       </div>
 
       <form onSubmit={handleAddItem} className="grid grid-cols-1 sm:grid-cols-5 gap-2 mb-4 bg-gray-50 p-3 rounded border">
+        
+        {/* Searchable Input Box using datalist */}
         <div className="sm:col-span-2">
-          <label className="block text-[10px] font-bold text-gray-600">ITEM</label>
-          <select
+          <label className="block text-[10px] font-bold text-gray-600">SEARCH / SELECT ITEM</label>
+          <input
+            list="items-list"
+            type="text"
             value={selectedItemName}
             onChange={(e) => setSelectedItemName(e.target.value)}
-            className="w-full border p-1.5 rounded text-xs bg-white"
-          >
-            <option value="">Select Item</option>
-            {itemsMaster.map((item) => (
-              <option key={item.id} value={item.name}>{item.name}</option>
+            placeholder="Type item name to search..."
+            className="w-full border p-1.5 rounded text-xs bg-white focus:ring-2 focus:ring-blue-500"
+          />
+          <datalist id="items-list">
+            {matchingItems.map((item) => (
+              <option key={item.id} value={item.name} />
             ))}
-          </select>
+          </datalist>
         </div>
 
         <div>
@@ -119,7 +129,7 @@ export default function InvoiceBuilder() {
         </div>
 
         <div className="sm:col-span-5 text-right mt-1">
-          <button type="submit" className="bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded">+ Add Row</button>
+          <button type="submit" className="bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded hover:bg-blue-700">+ Add Row</button>
         </div>
       </form>
 
